@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HerokuKeepAliveTask {
-    @Scheduled(fixedRate = 300000)
+    @Scheduled(cron = "00,15,30,45 8-18 * * 1-5")
     public void keepAlive() {
         try {
             Unirest.get("https://rddt-scraper.herokuapp.com").asString();
