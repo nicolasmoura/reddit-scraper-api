@@ -6,6 +6,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Component
 public class HerokuKeepAliveTask {
@@ -14,7 +17,7 @@ public class HerokuKeepAliveTask {
         try {
             Unirest.get("https://rddt-scraper.herokuapp.com").asString();
             Unirest.get("https://rddt-scraper-api.herokuapp.com").asString();
-            System.out.println("Sending keepAlive request to Heroku at " + new SimpleDateFormat("HH:mm dd/MM/yyyy"));
+            System.out.println("Sending keepAlive request to Heroku at " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy")));
         } catch (UnirestException e) {
             e.printStackTrace();
         }
